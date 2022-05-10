@@ -5,26 +5,27 @@
 <BODY>
     <?php
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $url = ('https://online.moysklad.ru/api/remap/1.2/entity/employee'); 
-        if(is_null($_POST['loginde'])){
-            $login = base64_decode($_POST['login']);}
-        else($login = ($_POST['loginde']));
-        if(is_null($_POST['passwordde'])){
-            $password = base64_decode($_POST['password']);}
-        else($password = ($_POST['passwordde']));
-        $headers = array(
-            'Content-Type:application/json',
-            'Authorization: Basic '.base64_encode("$login:$password")
-            );
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_URL, $url);
-        $response = curl_exec($ch);
-        $data = json_decode($response, 1);
-        curl_close($ch);
-        $n = count($data["rows"]);
-        }?>
+            $url = ('https://online.moysklad.ru/api/remap/1.2/entity/employee'); 
+            if(is_null($_POST['loginde'])){
+                $login = base64_decode($_POST['login']);}
+            else($login = ($_POST['loginde']));
+            if(is_null($_POST['passwordde'])){
+                $password = base64_decode($_POST['password']);}
+            else($password = ($_POST['passwordde']));
+            $headers = array(
+                'Content-Type:application/json',
+                'Authorization: Basic '.base64_encode("$login:$password")
+                );
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($ch, CURLOPT_URL, $url);
+            $response = curl_exec($ch);
+            $data = json_decode($response, 1);
+            curl_close($ch);
+            $n = count($data["rows"]);
+        }
+    ?>
     <div> Id Аккаунта: 
         <?php echo ($data["rows"][0]["accountId"]);?> </div>
     <div> Количество работников:  
